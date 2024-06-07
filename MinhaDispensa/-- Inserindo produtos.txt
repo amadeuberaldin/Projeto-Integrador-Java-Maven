@@ -1,0 +1,59 @@
+-- Inserindo produtos
+INSERT INTO Produto (nome, quantidade, porcao_referencia, proteinas, carboidratos, calorias, gorduras_totais) VALUES
+('Arroz', 100, 50, 2.5, 28, 130, 0.3),
+('Feijão', 150, 50, 3.6, 19.5, 108, 0.8),
+('Macarrão', 90, 80, 5, 31, 158, 1.2),
+('Azeite', 100, 15, 0, 0, 135, 15),
+('Frango', 200, 100, 31, 0, 165, 3.6),
+('Carne Bovina', 150, 100, 26, 0, 250, 15),
+('Leite', 1000, 200, 6.3, 9.4, 122, 5),
+('Ovo', 120, 50, 6, 0.6, 68, 4.7),
+('Cenoura', 150, 80, 0.9, 9, 41, 0.2),
+('Tomate', 200, 100, 1, 4.8, 18, 0.2),
+('Queijo', 50, 30, 7, 1.3, 104, 8.5),
+('Iogurte', 150, 100, 4.3, 6.7, 59, 2),
+('Pão', 50, 50, 7, 50, 260, 3),
+('Alface', 50, 30, 0.5, 0.5, 2, 0.1),
+('Banana', 150, 100, 1.1, 22.8, 89, 0.3),
+('Maçã', 150, 100, 0.5, 25, 95, 0.3),
+('Laranja', 150, 120, 1.2, 12, 62, 0.2),
+('Batata', 200, 100, 2, 17, 77, 0.1),
+('Cebola', 100, 100, 1.1, 9, 40, 0.1),
+('Alho', 30, 10, 0.6, 3, 4.5, 0);
+
+-- Inserindo receitas
+INSERT INTO Receita (nome, modo_preparo) VALUES
+('Arroz à Grega', 'Cozinhe o arroz normalmente e misture com vegetais picados.'),
+('Frango Assado', 'Tempere o frango e leve ao forno médio por 1 hora.'),
+('Bolo de Chocolate', 'Misture os ingredientes e asse por 40 minutos.'),
+('Omelete', 'Bata os ovos e cozinhe em uma frigideira com manteiga.'),
+('Lasanha à Bolonhesa', 'Monte a lasanha com camadas de molho, massa e queijo.'),
+('Sopa de Legumes', 'Cozinhe todos os vegetais em água fervente e tempere.'),
+('Vitamina de Frutas', 'Bata as frutas com leite ou iogurte.'),
+('Salada de Frutas', 'Corte todas as frutas e misture em uma tigela grande.'),
+('Macarrão ao Alho e Óleo', 'Cozinhe o macarrão e refogue com alho no azeite.'),
+('Panqueca', 'Prepare a massa e cozinhe em uma frigideira levemente untada.');
+
+-- Inserindo ingredientes para cada receita
+-- Os IDs das receitas e produtos devem corresponder aos IDs reais após inserção
+INSERT INTO Ingrediente (receita_id, produto_id, quantidade) VALUES
+(1, 1, 200),
+(1, 9, 100),
+(1, 10, 50),
+(2, 5, 500),
+(3, 13, 300),
+(3, 6, 200),
+(4, 8, 3),
+(5, 3, 500),
+(5, 12, 250),
+(6, 9, 100),
+(6, 10, 100),
+(7, 15, 100),
+(7, 16, 100),
+(8, 15, 150),
+(8, 16, 150),
+(8, 17, 100),
+(9, 3, 400),
+(9, 4, 30),
+(10, 8, 2),
+(10, 13, 200);

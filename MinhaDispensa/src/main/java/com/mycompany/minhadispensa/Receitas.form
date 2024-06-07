@@ -1,0 +1,470 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<Form version="1.3" maxVersion="1.9" type="org.netbeans.modules.form.forminfo.JFrameFormInfo">
+  <Properties>
+    <Property name="defaultCloseOperation" type="int" value="2"/>
+  </Properties>
+  <SyntheticProperties>
+    <SyntheticProperty name="formSizePolicy" type="int" value="1"/>
+    <SyntheticProperty name="generateCenter" type="boolean" value="false"/>
+  </SyntheticProperties>
+  <AuxValues>
+    <AuxValue name="FormSettings_autoResourcing" type="java.lang.Integer" value="0"/>
+    <AuxValue name="FormSettings_autoSetComponentName" type="java.lang.Boolean" value="false"/>
+    <AuxValue name="FormSettings_generateFQN" type="java.lang.Boolean" value="true"/>
+    <AuxValue name="FormSettings_generateMnemonicsCode" type="java.lang.Boolean" value="false"/>
+    <AuxValue name="FormSettings_i18nAutoMode" type="java.lang.Boolean" value="false"/>
+    <AuxValue name="FormSettings_layoutCodeTarget" type="java.lang.Integer" value="1"/>
+    <AuxValue name="FormSettings_listenerGenerationStyle" type="java.lang.Integer" value="0"/>
+    <AuxValue name="FormSettings_variablesLocal" type="java.lang.Boolean" value="false"/>
+    <AuxValue name="FormSettings_variablesModifier" type="java.lang.Integer" value="2"/>
+  </AuxValues>
+
+  <Layout>
+    <DimensionLayout dim="0">
+      <Group type="103" groupAlignment="0" attributes="0">
+          <Group type="102" alignment="0" attributes="0">
+              <Component id="jPanel1" min="-2" max="-2" attributes="0"/>
+              <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
+          </Group>
+      </Group>
+    </DimensionLayout>
+    <DimensionLayout dim="1">
+      <Group type="103" groupAlignment="0" attributes="0">
+          <Group type="102" alignment="0" attributes="0">
+              <Component id="jPanel1" min="-2" max="-2" attributes="0"/>
+              <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
+          </Group>
+      </Group>
+    </DimensionLayout>
+  </Layout>
+  <SubComponents>
+    <Container class="javax.swing.JPanel" name="jPanel1">
+
+      <Layout>
+        <DimensionLayout dim="0">
+          <Group type="103" groupAlignment="0" attributes="0">
+              <Group type="102" alignment="0" attributes="0">
+                  <EmptySpace max="-2" attributes="0"/>
+                  <Group type="103" groupAlignment="1" attributes="0">
+                      <Component id="jbtConcluir" min="-2" max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                          <Group type="102" alignment="0" attributes="0">
+                              <Group type="103" groupAlignment="1" attributes="0">
+                                  <Component id="jlblTitulo" alignment="1" min="-2" max="-2" attributes="0"/>
+                                  <Group type="102" alignment="1" attributes="0">
+                                      <Group type="103" groupAlignment="1" max="-2" attributes="0">
+                                          <Component id="jlblIngrtediente5" alignment="0" max="32767" attributes="0"/>
+                                          <Component id="jlblIngrediente4" alignment="0" max="32767" attributes="0"/>
+                                          <Component id="jlblIngrediente3" alignment="0" max="32767" attributes="0"/>
+                                          <Component id="jlblingrediente2" alignment="0" max="32767" attributes="0"/>
+                                          <Component id="jlblIngrediente1" alignment="0" max="32767" attributes="0"/>
+                                          <Component id="jlblNomeReceita" alignment="0" max="32767" attributes="0"/>
+                                      </Group>
+                                      <EmptySpace type="separate" max="-2" attributes="0"/>
+                                      <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                                          <Component id="jtfIngrediente1" alignment="0" max="32767" attributes="0"/>
+                                          <Component id="jtfIngrediente2" alignment="0" max="32767" attributes="0"/>
+                                          <Component id="jtfIngrediente3" alignment="0" max="32767" attributes="0"/>
+                                          <Component id="jtfIngrediente4" alignment="0" max="32767" attributes="0"/>
+                                          <Component id="jtfIngrediente5" alignment="0" pref="119" max="32767" attributes="0"/>
+                                          <Component id="jtfNomeReceita" alignment="0" max="32767" attributes="0"/>
+                                      </Group>
+                                  </Group>
+                              </Group>
+                              <EmptySpace type="separate" max="-2" attributes="0"/>
+                              <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                                  <Component id="jlblQuantidade1" alignment="0" max="32767" attributes="0"/>
+                                  <Component id="jlblQuantidade2" alignment="0" max="32767" attributes="0"/>
+                                  <Component id="jlblQuantidade3" alignment="0" max="32767" attributes="0"/>
+                                  <Component id="jlblQuantidade4" alignment="0" max="32767" attributes="0"/>
+                                  <Component id="jlblQuantidade5" alignment="0" max="32767" attributes="0"/>
+                              </Group>
+                              <EmptySpace type="separate" max="-2" attributes="0"/>
+                              <Group type="103" groupAlignment="0" attributes="0">
+                                  <Component id="jtfQuantidade1" alignment="0" min="-2" pref="71" max="-2" attributes="0"/>
+                                  <Component id="jtfQuantidade2" alignment="0" min="-2" pref="71" max="-2" attributes="0"/>
+                                  <Component id="jtfQuantidade3" alignment="0" min="-2" pref="71" max="-2" attributes="0"/>
+                                  <Component id="jtfQuantidade4" alignment="0" min="-2" pref="71" max="-2" attributes="0"/>
+                                  <Component id="jtfQuantidade5" alignment="0" min="-2" pref="71" max="-2" attributes="0"/>
+                              </Group>
+                          </Group>
+                          <Group type="102" alignment="0" attributes="0">
+                              <Component id="jlblModoPreparo" min="-2" max="-2" attributes="0"/>
+                              <EmptySpace type="separate" max="-2" attributes="0"/>
+                              <Component id="jspEntradaModoPreparo" pref="288" max="32767" attributes="0"/>
+                          </Group>
+                      </Group>
+                  </Group>
+                  <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                  <Component id="jScrollPane2" min="-2" pref="260" max="-2" attributes="0"/>
+                  <Group type="103" groupAlignment="0" attributes="0">
+                      <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                          <Group type="102" alignment="0" attributes="0">
+                              <EmptySpace min="-2" pref="47" max="-2" attributes="0"/>
+                              <Group type="103" groupAlignment="0" attributes="0">
+                                  <Group type="102" alignment="0" attributes="0">
+                                      <Component id="jlblIngrediente2Mostrar" min="-2" pref="94" max="-2" attributes="0"/>
+                                      <EmptySpace type="separate" max="-2" attributes="0"/>
+                                      <Component id="jlblQuantidadeIngrediente2Mostrar" min="-2" max="-2" attributes="0"/>
+                                  </Group>
+                                  <Group type="102" alignment="0" attributes="0">
+                                      <Component id="jlblIngrediente1Mostrar" min="-2" pref="94" max="-2" attributes="0"/>
+                                      <EmptySpace type="separate" max="-2" attributes="0"/>
+                                      <Component id="jlblQuantidadeIngrediente1Mostrar" min="-2" max="-2" attributes="0"/>
+                                  </Group>
+                                  <Group type="102" alignment="0" attributes="0">
+                                      <Component id="jlblIngrediente3Mostrar" min="-2" pref="94" max="-2" attributes="0"/>
+                                      <EmptySpace type="separate" max="-2" attributes="0"/>
+                                      <Component id="jlblQuantidadeIngrediente3Mostrar" min="-2" max="-2" attributes="0"/>
+                                  </Group>
+                                  <Group type="102" alignment="0" attributes="0">
+                                      <Component id="jlblIngrediente4Mostrar" min="-2" pref="94" max="-2" attributes="0"/>
+                                      <EmptySpace type="separate" max="-2" attributes="0"/>
+                                      <Component id="jlblQuantidadeIngrediente4Mostrar" min="-2" max="-2" attributes="0"/>
+                                  </Group>
+                                  <Group type="102" alignment="0" attributes="0">
+                                      <Component id="jlblIngrtediente5Mostrar" min="-2" pref="94" max="-2" attributes="0"/>
+                                      <EmptySpace type="separate" max="-2" attributes="0"/>
+                                      <Component id="jlblQuantidadeIngrediente5Mostrar" min="-2" max="-2" attributes="0"/>
+                                  </Group>
+                              </Group>
+                          </Group>
+                          <Group type="102" alignment="0" attributes="0">
+                              <EmptySpace min="-2" pref="38" max="-2" attributes="0"/>
+                              <Component id="jlblModoPreparoMostrar" min="-2" max="-2" attributes="0"/>
+                          </Group>
+                          <Group type="102" alignment="0" attributes="0">
+                              <EmptySpace min="-2" pref="27" max="-2" attributes="0"/>
+                              <Component id="jspMostrarModoPreparo" min="-2" pref="234" max="-2" attributes="0"/>
+                          </Group>
+                          <Group type="102" attributes="0">
+                              <EmptySpace max="32767" attributes="0"/>
+                              <Component id="jbtExcluir" min="-2" max="-2" attributes="0"/>
+                              <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                              <Component id="jbtVoltar" min="-2" max="-2" attributes="0"/>
+                          </Group>
+                      </Group>
+                      <Group type="102" alignment="0" attributes="0">
+                          <EmptySpace min="-2" pref="100" max="-2" attributes="0"/>
+                          <Component id="jlblNomeReceitaMostrar" min="-2" max="-2" attributes="0"/>
+                      </Group>
+                  </Group>
+                  <EmptySpace pref="20" max="32767" attributes="0"/>
+              </Group>
+          </Group>
+        </DimensionLayout>
+        <DimensionLayout dim="1">
+          <Group type="103" groupAlignment="0" attributes="0">
+              <Group type="102" alignment="0" attributes="0">
+                  <EmptySpace max="-2" attributes="0"/>
+                  <Group type="103" groupAlignment="1" attributes="0">
+                      <Group type="102" alignment="1" attributes="0">
+                          <Component id="jlblTitulo" min="-2" max="-2" attributes="0"/>
+                          <EmptySpace type="separate" max="-2" attributes="0"/>
+                          <Group type="103" groupAlignment="3" attributes="0">
+                              <Component id="jlblNomeReceita" alignment="3" min="-2" max="-2" attributes="0"/>
+                              <Component id="jtfNomeReceita" alignment="3" min="-2" max="-2" attributes="0"/>
+                          </Group>
+                          <EmptySpace max="-2" attributes="0"/>
+                          <Group type="103" groupAlignment="3" attributes="0">
+                              <Component id="jlblIngrediente1" alignment="3" min="-2" max="-2" attributes="0"/>
+                              <Component id="jtfIngrediente1" alignment="3" min="-2" max="-2" attributes="0"/>
+                              <Component id="jlblQuantidade1" alignment="3" min="-2" max="-2" attributes="0"/>
+                              <Component id="jtfQuantidade1" alignment="3" min="-2" max="-2" attributes="0"/>
+                          </Group>
+                          <EmptySpace max="-2" attributes="0"/>
+                          <Group type="103" groupAlignment="3" attributes="0">
+                              <Component id="jlblingrediente2" alignment="3" min="-2" max="-2" attributes="0"/>
+                              <Component id="jtfIngrediente2" alignment="3" min="-2" max="-2" attributes="0"/>
+                              <Component id="jlblQuantidade2" alignment="3" min="-2" max="-2" attributes="0"/>
+                              <Component id="jtfQuantidade2" alignment="3" min="-2" max="-2" attributes="0"/>
+                          </Group>
+                          <EmptySpace max="-2" attributes="0"/>
+                          <Group type="103" groupAlignment="3" attributes="0">
+                              <Component id="jlblIngrediente3" alignment="3" min="-2" max="-2" attributes="0"/>
+                              <Component id="jtfIngrediente3" alignment="3" min="-2" max="-2" attributes="0"/>
+                              <Component id="jlblQuantidade3" alignment="3" min="-2" max="-2" attributes="0"/>
+                              <Component id="jtfQuantidade3" alignment="3" min="-2" max="-2" attributes="0"/>
+                          </Group>
+                          <EmptySpace max="-2" attributes="0"/>
+                          <Group type="103" groupAlignment="3" attributes="0">
+                              <Component id="jlblIngrediente4" alignment="3" min="-2" max="-2" attributes="0"/>
+                              <Component id="jtfIngrediente4" alignment="3" min="-2" max="-2" attributes="0"/>
+                              <Component id="jlblQuantidade4" alignment="3" min="-2" max="-2" attributes="0"/>
+                              <Component id="jtfQuantidade4" alignment="3" min="-2" max="-2" attributes="0"/>
+                          </Group>
+                          <EmptySpace max="-2" attributes="0"/>
+                          <Group type="103" groupAlignment="3" attributes="0">
+                              <Component id="jlblIngrtediente5" alignment="3" min="-2" max="-2" attributes="0"/>
+                              <Component id="jtfIngrediente5" alignment="3" min="-2" max="-2" attributes="0"/>
+                              <Component id="jlblQuantidade5" alignment="3" min="-2" max="-2" attributes="0"/>
+                              <Component id="jtfQuantidade5" alignment="3" min="-2" max="-2" attributes="0"/>
+                          </Group>
+                          <EmptySpace type="separate" max="-2" attributes="0"/>
+                          <Group type="103" groupAlignment="0" attributes="0">
+                              <Group type="102" alignment="0" attributes="0">
+                                  <Component id="jlblModoPreparo" min="-2" max="-2" attributes="0"/>
+                                  <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
+                              </Group>
+                              <Component id="jspEntradaModoPreparo" alignment="0" pref="104" max="32767" attributes="0"/>
+                          </Group>
+                          <EmptySpace min="-2" pref="46" max="-2" attributes="0"/>
+                      </Group>
+                      <Group type="102" alignment="1" attributes="0">
+                          <Group type="103" groupAlignment="1" attributes="0">
+                              <Component id="jScrollPane2" alignment="0" pref="0" max="32767" attributes="0"/>
+                              <Group type="102" alignment="1" attributes="0">
+                                  <EmptySpace min="-2" pref="22" max="-2" attributes="0"/>
+                                  <Component id="jlblNomeReceitaMostrar" min="-2" max="-2" attributes="0"/>
+                                  <EmptySpace type="separate" max="-2" attributes="0"/>
+                                  <Group type="103" groupAlignment="3" attributes="0">
+                                      <Component id="jlblQuantidadeIngrediente1Mostrar" alignment="3" min="-2" max="-2" attributes="0"/>
+                                      <Component id="jlblIngrediente1Mostrar" alignment="3" min="-2" max="-2" attributes="0"/>
+                                  </Group>
+                                  <EmptySpace max="-2" attributes="0"/>
+                                  <Group type="103" groupAlignment="3" attributes="0">
+                                      <Component id="jlblQuantidadeIngrediente2Mostrar" alignment="3" min="-2" max="-2" attributes="0"/>
+                                      <Component id="jlblIngrediente2Mostrar" alignment="3" min="-2" max="-2" attributes="0"/>
+                                  </Group>
+                                  <EmptySpace max="-2" attributes="0"/>
+                                  <Group type="103" groupAlignment="3" attributes="0">
+                                      <Component id="jlblQuantidadeIngrediente3Mostrar" alignment="3" min="-2" max="-2" attributes="0"/>
+                                      <Component id="jlblIngrediente3Mostrar" alignment="3" min="-2" max="-2" attributes="0"/>
+                                  </Group>
+                                  <EmptySpace max="-2" attributes="0"/>
+                                  <Group type="103" groupAlignment="3" attributes="0">
+                                      <Component id="jlblQuantidadeIngrediente4Mostrar" alignment="3" min="-2" max="-2" attributes="0"/>
+                                      <Component id="jlblIngrediente4Mostrar" alignment="3" min="-2" max="-2" attributes="0"/>
+                                  </Group>
+                                  <EmptySpace max="-2" attributes="0"/>
+                                  <Group type="103" groupAlignment="3" attributes="0">
+                                      <Component id="jlblIngrtediente5Mostrar" alignment="3" min="-2" max="-2" attributes="0"/>
+                                      <Component id="jlblQuantidadeIngrediente5Mostrar" alignment="3" min="-2" max="-2" attributes="0"/>
+                                  </Group>
+                                  <EmptySpace max="32767" attributes="0"/>
+                                  <Component id="jlblModoPreparoMostrar" min="-2" max="-2" attributes="0"/>
+                                  <EmptySpace max="-2" attributes="0"/>
+                                  <Component id="jspMostrarModoPreparo" min="-2" pref="98" max="-2" attributes="0"/>
+                                  <EmptySpace type="separate" max="-2" attributes="0"/>
+                                  <Group type="103" groupAlignment="3" attributes="0">
+                                      <Component id="jbtVoltar" alignment="3" min="-2" max="-2" attributes="0"/>
+                                      <Component id="jbtConcluir" alignment="3" min="-2" max="-2" attributes="0"/>
+                                      <Component id="jbtExcluir" alignment="3" min="-2" max="-2" attributes="0"/>
+                                  </Group>
+                              </Group>
+                          </Group>
+                          <EmptySpace min="-2" pref="11" max="-2" attributes="0"/>
+                      </Group>
+                  </Group>
+              </Group>
+          </Group>
+        </DimensionLayout>
+      </Layout>
+      <SubComponents>
+        <Component class="javax.swing.JLabel" name="jlblTitulo">
+          <Properties>
+            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+              <Font name="Segoe UI" size="14" style="1"/>
+            </Property>
+            <Property name="text" type="java.lang.String" value="Crie sua Receita"/>
+          </Properties>
+        </Component>
+        <Component class="javax.swing.JLabel" name="jlblNomeReceita">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="Nome da Receita:"/>
+          </Properties>
+        </Component>
+        <Component class="javax.swing.JLabel" name="jlblIngrediente1">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="Ingrediente 1:"/>
+          </Properties>
+        </Component>
+        <Component class="javax.swing.JLabel" name="jlblingrediente2">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="Ingrediente 2:"/>
+          </Properties>
+        </Component>
+        <Component class="javax.swing.JLabel" name="jlblIngrediente3">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="Ingrediente 3:"/>
+          </Properties>
+        </Component>
+        <Component class="javax.swing.JLabel" name="jlblIngrediente4">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="Ingrediente 4:"/>
+          </Properties>
+        </Component>
+        <Component class="javax.swing.JLabel" name="jlblIngrtediente5">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="Ingrediente 5:"/>
+          </Properties>
+        </Component>
+        <Component class="javax.swing.JTextField" name="jtfNomeReceita">
+        </Component>
+        <Component class="javax.swing.JTextField" name="jtfIngrediente1">
+        </Component>
+        <Component class="javax.swing.JTextField" name="jtfIngrediente2">
+        </Component>
+        <Component class="javax.swing.JTextField" name="jtfIngrediente3">
+        </Component>
+        <Component class="javax.swing.JTextField" name="jtfIngrediente4">
+        </Component>
+        <Component class="javax.swing.JTextField" name="jtfIngrediente5">
+        </Component>
+        <Component class="javax.swing.JLabel" name="jlblQuantidade1">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="Quantidade:"/>
+          </Properties>
+        </Component>
+        <Component class="javax.swing.JLabel" name="jlblQuantidade2">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="Quantidade:"/>
+          </Properties>
+        </Component>
+        <Component class="javax.swing.JLabel" name="jlblQuantidade3">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="Quantidade:"/>
+          </Properties>
+        </Component>
+        <Component class="javax.swing.JLabel" name="jlblQuantidade4">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="Quantidade:"/>
+          </Properties>
+        </Component>
+        <Component class="javax.swing.JLabel" name="jlblQuantidade5">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="Quantidade:"/>
+          </Properties>
+        </Component>
+        <Component class="javax.swing.JTextField" name="jtfQuantidade1">
+        </Component>
+        <Component class="javax.swing.JTextField" name="jtfQuantidade2">
+        </Component>
+        <Component class="javax.swing.JTextField" name="jtfQuantidade3">
+        </Component>
+        <Component class="javax.swing.JTextField" name="jtfQuantidade4">
+        </Component>
+        <Component class="javax.swing.JTextField" name="jtfQuantidade5">
+        </Component>
+        <Component class="javax.swing.JLabel" name="jlblModoPreparo">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="Modo de preparo:"/>
+          </Properties>
+        </Component>
+        <Container class="javax.swing.JScrollPane" name="jspEntradaModoPreparo">
+          <AuxValues>
+            <AuxValue name="autoScrollPane" type="java.lang.Boolean" value="true"/>
+          </AuxValues>
+
+          <Layout class="org.netbeans.modules.form.compat2.layouts.support.JScrollPaneSupportLayout"/>
+          <SubComponents>
+            <Component class="javax.swing.JTextArea" name="jtaCadarstrarModoDePreparo">
+              <Properties>
+                <Property name="columns" type="int" value="20"/>
+                <Property name="rows" type="int" value="5"/>
+              </Properties>
+            </Component>
+          </SubComponents>
+        </Container>
+        <Component class="javax.swing.JButton" name="jbtConcluir">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="Concluir"/>
+          </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jbtConcluirActionPerformed"/>
+          </Events>
+        </Component>
+        <Component class="javax.swing.JButton" name="jbtVoltar">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="Voltar"/>
+          </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jbtVoltarActionPerformed"/>
+          </Events>
+        </Component>
+        <Container class="javax.swing.JScrollPane" name="jScrollPane2">
+          <AuxValues>
+            <AuxValue name="autoScrollPane" type="java.lang.Boolean" value="true"/>
+          </AuxValues>
+
+          <Layout class="org.netbeans.modules.form.compat2.layouts.support.JScrollPaneSupportLayout"/>
+          <SubComponents>
+            <Component class="javax.swing.JTable" name="jtblVisualizarNomesDasReceitas">
+              <Properties>
+                <Property name="model" type="javax.swing.table.TableModel" editor="org.netbeans.modules.form.editors2.TableModelEditor">
+                  <Table columnCount="1" rowCount="0">
+                    <Column editable="true" title="Receitas" type="java.lang.String"/>
+                  </Table>
+                </Property>
+                <Property name="columnModel" type="javax.swing.table.TableColumnModel" editor="org.netbeans.modules.form.editors2.TableColumnModelEditor">
+                  <TableColumnModel selectionModel="1">
+                    <Column maxWidth="-1" minWidth="-1" prefWidth="-1" resizable="true">
+                      <Title/>
+                      <Editor/>
+                      <Renderer/>
+                    </Column>
+                  </TableColumnModel>
+                </Property>
+                <Property name="columnSelectionAllowed" type="boolean" value="true"/>
+                <Property name="tableHeader" type="javax.swing.table.JTableHeader" editor="org.netbeans.modules.form.editors2.JTableHeaderEditor">
+                  <TableHeader reorderingAllowed="true" resizingAllowed="true"/>
+                </Property>
+              </Properties>
+            </Component>
+          </SubComponents>
+        </Container>
+        <Component class="javax.swing.JLabel" name="jlblIngrediente1Mostrar">
+        </Component>
+        <Component class="javax.swing.JLabel" name="jlblIngrediente2Mostrar">
+        </Component>
+        <Component class="javax.swing.JLabel" name="jlblNomeReceitaMostrar">
+        </Component>
+        <Component class="javax.swing.JLabel" name="jlblIngrediente3Mostrar">
+        </Component>
+        <Component class="javax.swing.JLabel" name="jlblIngrediente4Mostrar">
+        </Component>
+        <Component class="javax.swing.JLabel" name="jlblIngrtediente5Mostrar">
+        </Component>
+        <Component class="javax.swing.JLabel" name="jlblQuantidadeIngrediente1Mostrar">
+        </Component>
+        <Component class="javax.swing.JLabel" name="jlblQuantidadeIngrediente2Mostrar">
+        </Component>
+        <Component class="javax.swing.JLabel" name="jlblQuantidadeIngrediente3Mostrar">
+        </Component>
+        <Component class="javax.swing.JLabel" name="jlblQuantidadeIngrediente4Mostrar">
+        </Component>
+        <Component class="javax.swing.JLabel" name="jlblQuantidadeIngrediente5Mostrar">
+        </Component>
+        <Component class="javax.swing.JLabel" name="jlblModoPreparoMostrar">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="Modo de preparo:"/>
+          </Properties>
+        </Component>
+        <Container class="javax.swing.JScrollPane" name="jspMostrarModoPreparo">
+          <AuxValues>
+            <AuxValue name="autoScrollPane" type="java.lang.Boolean" value="true"/>
+          </AuxValues>
+
+          <Layout class="org.netbeans.modules.form.compat2.layouts.support.JScrollPaneSupportLayout"/>
+          <SubComponents>
+            <Component class="javax.swing.JTextArea" name="jtaMostrarModoDePreparo">
+              <Properties>
+                <Property name="columns" type="int" value="20"/>
+                <Property name="rows" type="int" value="5"/>
+              </Properties>
+            </Component>
+          </SubComponents>
+        </Container>
+        <Component class="javax.swing.JButton" name="jbtExcluir">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="Excluir"/>
+          </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jbtExcluirActionPerformed"/>
+          </Events>
+        </Component>
+      </SubComponents>
+    </Container>
+  </SubComponents>
+</Form>
