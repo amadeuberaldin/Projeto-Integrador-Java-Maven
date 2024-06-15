@@ -1,4 +1,4 @@
-# Integrative Project: Minha Dispença
+# Integrative Project: Minha Despensa
 
 In this project, I was able to enhance the user experience, making the application much more user-friendly. Since this project was undertaken after completing all the tasks in my course, I was able to apply all the techniques developed throughout the course. This made the project much more intuitive, both in terms of programming and user interaction.
 
