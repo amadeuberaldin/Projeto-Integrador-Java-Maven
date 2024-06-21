@@ -1,23 +1,13 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package com.mycompany.minhadispensa;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.Table;
-import javax.validation.constraints.Email;
-import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Size;
+import javax.persistence.*;
+import javax.validation.constraints.*;
+import java.util.List;
 
 @Entity
 @Table(name = "usuario")
 public class Usuario {
-    
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -42,12 +32,17 @@ public class Usuario {
     @Size(min = 1, max = 1, message = "O sexo deve ser 'M' ou 'F'.")
     private char sexo;
 
+    @OneToMany(mappedBy = "usuario", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<Despensa> despensa;
+
+    @OneToMany(mappedBy = "usuario", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<Receita> receitas;
+
     // Construtor padrão exigido pelo JPA
     public Usuario() {
     }
 
     // Getters e setters
-
     public Long getId() {
         return id;
     }
@@ -96,4 +91,19 @@ public class Usuario {
         this.sexo = sexo;
     }
 
+    public List<Despensa> getDespensa() {
+        return despensa;
+    }
+
+    public void setDespensa(List<Despensa> despensa) {
+        this.despensa = despensa;
+    }
+
+    public List<Receita> getReceitas() {
+        return receitas;
+    }
+
+    public void setReceitas(List<Receita> receitas) {
+        this.receitas = receitas;
+    }
 }

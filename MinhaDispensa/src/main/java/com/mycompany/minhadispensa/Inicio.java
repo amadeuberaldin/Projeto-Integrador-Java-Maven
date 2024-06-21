@@ -1,24 +1,19 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
- */
 package com.mycompany.minhadispensa;
 
 import javax.persistence.EntityManager;
 
 public class Inicio extends javax.swing.JFrame {
 
-    private String nomeUsuario;
+    private Usuario usuario;
     private EntityManager em;
 
-    public Inicio(String nomeUsuario, EntityManager em) {
-        this.nomeUsuario = nomeUsuario;
+    public Inicio(Usuario usuario, EntityManager em) {
+        this.usuario = usuario;
         this.em = em;
         initComponents();
-        jlblNomeDoUsuarioLogado.setText(nomeUsuario); // Define o nome do usuário no JLabel
+        jlblNomeDoUsuarioLogado.setText(usuario.getNome()); // Define o nome do usuário no JLabel
     }
 
-    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -106,18 +101,18 @@ public class Inicio extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jbtnDispensaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtnDispensaActionPerformed
-        Dispensa dispensa = new Dispensa();
+        Dispensa dispensa = new Dispensa(usuario, em);
         dispensa.setVisible(true);
         dispensa.setLocationRelativeTo(null);  // Centraliza a janela
     }//GEN-LAST:event_jbtnDispensaActionPerformed
 
     private void jbtnReceitasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtnReceitasActionPerformed
-        Receitas receitas = new Receitas();
+        Receitas receitas = new Receitas(usuario, em);
         receitas.setVisible(true);
         receitas.setLocationRelativeTo(null);  // Centraliza a janela
     }//GEN-LAST:event_jbtnReceitasActionPerformed
 
-   //este trecho foi removido
+    //este trecho foi removido
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel jPanel1;

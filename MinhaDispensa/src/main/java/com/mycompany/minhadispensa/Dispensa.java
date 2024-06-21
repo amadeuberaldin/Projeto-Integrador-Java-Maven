@@ -1,11 +1,5 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
- */
 package com.mycompany.minhadispensa;
 
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.NoResultException;
@@ -14,51 +8,51 @@ import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 import javax.swing.table.DefaultTableModel;
 
-/**
- *
- * @author Vaio
- */
 public class Dispensa extends javax.swing.JFrame {
 
-    /**
-     * Creates new form Dispensa
-     */
-    public Dispensa() {
+    private Usuario usuario;
+    private EntityManager em;
+
+    public Dispensa(Usuario usuario, EntityManager em) {
+        this.usuario = usuario;
+        this.em = em;
         initComponents();
         carregarProdutos();
         configurarListeners();
     }
 
     private void carregarProdutos() {
-        List<Produto> produtos = buscarProdutos(); // Método para buscar produtos do banco de dados
+        List<Despensa> produtos = buscarProdutos(usuario); // Método para buscar produtos do banco de dados
         DefaultTableModel model = (DefaultTableModel) jtprodutos.getModel();
         model.setRowCount(0);
-        for (Produto produto : produtos) {
-            model.addRow(new Object[]{produto.getNome(), produto.getQuantidade()});
+        for (Despensa despensa : produtos) {
+            model.addRow(new Object[]{despensa.getProduto().getNome(), despensa.getQuantidade()});
         }
     }
 
-    private List<Produto> buscarProdutos() {
-        EntityManager em = JPAUtil.getEntityManager();
+    private List<Despensa> buscarProdutos(Usuario usuario) {
         try {
-            return em.createQuery("SELECT p FROM Produto p", Produto.class).getResultList();
-        } finally {
-            em.close();
+            return em.createQuery("SELECT d FROM Despensa d WHERE d.usuario = :usuario", Despensa.class)
+                    .setParameter("usuario", usuario)
+                    .getResultList();
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(this, "Erro ao buscar produtos: " + e.getMessage(), "Erro", JOptionPane.ERROR_MESSAGE);
+            return null;
         }
     }
 
     private void adicionarOuAtualizarProduto() {
         String nome = jtfNomeProduto.getText();
         float quantidade = Float.parseFloat(jtfQuantidadeProduto.getText());
-        EntityManager em = JPAUtil.getEntityManager();
         try {
             Produto produto = em.createQuery("SELECT p FROM Produto p WHERE p.nome = :nome", Produto.class)
                     .setParameter("nome", nome)
                     .getResultList()
-                    .stream().findFirst().orElse(null);
+                    .stream()
+                    .findFirst()
+                    .orElse(null);
             em.getTransaction().begin();
             if (produto == null) {
-                // Se é um produto novo, crie uma nova instância e salve todos os campos
                 produto = new Produto();
                 produto.setNome(nome);
                 produto.setQuantidade(quantidade);
@@ -71,9 +65,21 @@ public class Dispensa extends javax.swing.JFrame {
                 }
                 em.persist(produto);
             } else {
-                // Apenas atualize a quantidade se for adicionar ao produto existente
                 produto.setQuantidade(produto.getQuantidade() + quantidade);
                 em.merge(produto);
+            }
+            DespensaId despensaId = new DespensaId(usuario.getId(), produto.getId());
+            Despensa despensa = em.find(Despensa.class, despensaId);
+            if (despensa == null) {
+                despensa = new Despensa();
+                despensa.setId(despensaId);
+                despensa.setUsuario(usuario);
+                despensa.setProduto(produto);
+                despensa.setQuantidade(quantidade);
+                em.persist(despensa);
+            } else {
+                despensa.setQuantidade(despensa.getQuantidade() + quantidade);
+                em.merge(despensa);
             }
             em.getTransaction().commit();
             carregarProdutos();
@@ -81,7 +87,6 @@ public class Dispensa extends javax.swing.JFrame {
             em.getTransaction().rollback();
             JOptionPane.showMessageDialog(this, "Erro ao salvar o produto: " + ex.getMessage(), "Erro", JOptionPane.ERROR_MESSAGE);
         } finally {
-            em.close();
             limparCamposCadastro();
         }
     }
@@ -94,12 +99,11 @@ public class Dispensa extends javax.swing.JFrame {
         jtfCarboidratos.setText("");
         jtfCalorias.setText("");
         jtfGordurasTotais.setText("");
-        buttonGroup1.clearSelection();  // Limpa a seleção do grupo de botões, se necessário
+        buttonGroup1.clearSelection();
     }
 
     private void atualizarEstadoCampos() {
         boolean ehProdutoNovo = jrbProdutoNovo.isSelected();
-        // Define a acessibilidade dos campos com base na seleção do radio button
         jtfPorcaoReferencia.setEnabled(ehProdutoNovo);
         jtfProteinas.setEnabled(ehProdutoNovo);
         jtfCarboidratos.setEnabled(ehProdutoNovo);
@@ -128,25 +132,14 @@ public class Dispensa extends javax.swing.JFrame {
             }
         });
 
-        jrbProdutoNovo.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-                atualizarEstadoCampos();
-            }
-        });
-
-        jrbProdutoJaCadastrado.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-                atualizarEstadoCampos();
-            }
-        });
+        jrbProdutoNovo.addActionListener(e -> atualizarEstadoCampos());
+        jrbProdutoJaCadastrado.addActionListener(e -> atualizarEstadoCampos());
     }
 
     private void atualizarCamposComDadosDoProdutoSelecionado() {
         int selectedRow = jtprodutos.getSelectedRow();
         if (selectedRow >= 0) {
-            String nomeProduto = (String) jtprodutos.getValueAt(selectedRow, 0);  // Assume que o nome do produto está na primeira coluna
-
-            EntityManager em = JPAUtil.getEntityManager();
+            String nomeProduto = (String) jtprodutos.getValueAt(selectedRow, 0);
             try {
                 Produto produto = em.createQuery("SELECT p FROM Produto p WHERE p.nome = :nome", Produto.class)
                         .setParameter("nome", nomeProduto)
@@ -163,8 +156,6 @@ public class Dispensa extends javax.swing.JFrame {
                 }
             } catch (NoResultException nre) {
                 JOptionPane.showMessageDialog(this, "Produto não encontrado", "Erro", JOptionPane.ERROR_MESSAGE);
-            } finally {
-                em.close();
             }
         }
     }
@@ -182,7 +173,6 @@ public class Dispensa extends javax.swing.JFrame {
         String nomeProduto = (String) jtprodutos.getValueAt(row, 0);
         int confirm = JOptionPane.showConfirmDialog(this, "Deseja realmente excluir o produto " + nomeProduto + "?", "Confirmar Exclusão", JOptionPane.YES_NO_OPTION);
         if (confirm == JOptionPane.YES_OPTION) {
-            EntityManager em = JPAUtil.getEntityManager();
             try {
                 Produto produto = em.createQuery("SELECT p FROM Produto p WHERE p.nome = :nome", Produto.class)
                         .setParameter("nome", nomeProduto)
@@ -190,12 +180,11 @@ public class Dispensa extends javax.swing.JFrame {
                 em.getTransaction().begin();
                 em.remove(produto);
                 em.getTransaction().commit();
-                carregarProdutos();  // Atualizar a tabela após exclusão
+                carregarProdutos();
             } catch (Exception ex) {
                 em.getTransaction().rollback();
                 JOptionPane.showMessageDialog(this, "Erro ao excluir o produto: " + ex.getMessage(), "Erro", JOptionPane.ERROR_MESSAGE);
             } finally {
-                em.close();
                 limparCamposMostrar();
                 carregarProdutos();
             }
@@ -507,40 +496,6 @@ public class Dispensa extends javax.swing.JFrame {
         excluirProduto();
     }//GEN-LAST:event_jbtExcluirActionPerformed
 
-    /**
-     * @param args the command line arguments
-     */
-    public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(Dispensa.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(Dispensa.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(Dispensa.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(Dispensa.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        }
-        //</editor-fold>
-
-        /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new Dispensa().setVisible(true);
-            }
-        });
-    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.ButtonGroup buttonGroup1;

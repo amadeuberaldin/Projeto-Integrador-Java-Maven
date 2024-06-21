@@ -1,21 +1,13 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package com.mycompany.minhadispensa;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
+import java.util.List;
 
 @Entity
 @Table(name = "produto")
 public class Produto {
-    
-   @Id
+
+    @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
@@ -25,21 +17,23 @@ public class Produto {
     @Column(nullable = false)
     private Float quantidade;
 
-    @Column(name = "porcao_referencia")  // Corrige o mapeamento para a coluna correta
+    @Column(name = "porcao_referencia")
     private Float porcaoReferencia;
 
-    @Column(name = "proteinas")  // Opcional se o nome no banco é idêntico
+    @Column(name = "proteinas")
     private Float proteinas;
 
-    @Column(name = "carboidratos")  // Opcional se o nome no banco é idêntico
+    @Column(name = "carboidratos")
     private Float carboidratos;
 
-    @Column(name = "calorias")  // Opcional se o nome no banco é idêntico
+    @Column(name = "calorias")
     private Float calorias;
 
-    @Column(name = "gorduras_totais")  // Corrige o mapeamento para a coluna correta
+    @Column(name = "gorduras_totais")
     private Float gordurasTotais;
 
+    @OneToMany(mappedBy = "produto", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<Despensa> despensa;
 
     // Construtor padrão exigido pelo JPA
     public Produto() {
@@ -114,5 +108,13 @@ public class Produto {
 
     public void setGordurasTotais(Float gordurasTotais) {
         this.gordurasTotais = gordurasTotais;
+    }
+
+    public List<Despensa> getDespensa() {
+        return despensa;
+    }
+
+    public void setDespensa(List<Despensa> despensa) {
+        this.despensa = despensa;
     }
 }

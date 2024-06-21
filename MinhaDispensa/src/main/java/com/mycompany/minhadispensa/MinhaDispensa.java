@@ -1,8 +1,3 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Project/Maven2/JavaApp/src/main/java/${packagePath}/${mainClassName}.java to edit this template
- */
-
 package com.mycompany.minhadispensa;
 
 import javax.persistence.EntityManager;
@@ -18,7 +13,7 @@ public class MinhaDispensa {
     public static void main(String[] args) {
         // Inicializa o EntityManagerFactory
         emf = Persistence.createEntityManagerFactory("MinhaDispensaPU");
-        
+
         SwingUtilities.invokeLater(() -> iniciarInterfaceGrafica());
     }
 
@@ -30,6 +25,9 @@ public class MinhaDispensa {
         loginFrame.pack();
         loginFrame.setLocationRelativeTo(null);
         loginFrame.setVisible(true);
+
+        // Adiciona um listener para fechar o EntityManagerFactory ao fechar a aplicação
+        Runtime.getRuntime().addShutdownHook(new Thread(MinhaDispensa::fecharFactory));
     }
 
     public static void fecharFactory() {

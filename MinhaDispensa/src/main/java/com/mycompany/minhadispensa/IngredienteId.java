@@ -1,17 +1,15 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package com.mycompany.minhadispensa;
 
 import java.io.Serializable;
 import java.util.Objects;
 
 public class IngredienteId implements Serializable {
-    private Integer receita;  // Se Receita.id é Integer
-    private Long produto;     // Se Produto.id é Long
 
-    public IngredienteId() {}
+    private Integer receita;
+    private Long produto;
+
+    public IngredienteId() {
+    }
 
     public IngredienteId(Integer receita, Long produto) {
         this.receita = receita;
@@ -41,10 +39,14 @@ public class IngredienteId implements Serializable {
 
     @Override
     public boolean equals(Object obj) {
-        if (this == obj) return true;
-        if (obj == null || getClass() != obj.getClass()) return false;
+        if (this == obj) {
+            return true;
+        }
+        if (obj == null || getClass() != obj.getClass()) {
+            return false;
+        }
         IngredienteId that = (IngredienteId) obj;
-        return Objects.equals(receita, that.receita) &&
-               Objects.equals(produto, that.produto);
+        return Objects.equals(receita, that.receita)
+                && Objects.equals(produto, that.produto);
     }
 }

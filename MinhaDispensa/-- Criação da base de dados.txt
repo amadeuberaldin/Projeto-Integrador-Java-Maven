@@ -1,7 +1,8 @@
 -- Criação da base de dados
-CREATE DATABASE IF NOT EXISTS minhadispensa;
-USE minhadispensa;
+CREATE DATABASE IF NOT EXISTS minhadespensa;
+USE minhadespensa;
 
+-- Tabela de usuários
 CREATE TABLE Usuario (
     id INT AUTO_INCREMENT PRIMARY KEY,
     nome VARCHAR(255) NOT NULL,
@@ -12,10 +13,10 @@ CREATE TABLE Usuario (
     CONSTRAINT chk_sexo CHECK (sexo IN ('M', 'F'))
 );
 
+-- Tabela de produtos
 CREATE TABLE Produto (
     id INT AUTO_INCREMENT PRIMARY KEY,
     nome VARCHAR(255) NOT NULL,
-    quantidade FLOAT NOT NULL,
     porcao_referencia FLOAT,
     proteinas FLOAT,
     carboidratos FLOAT,
@@ -23,12 +24,24 @@ CREATE TABLE Produto (
     gorduras_totais FLOAT
 );
 
+-- Tabela de despensa do usuário (relaciona usuários com produtos)
+CREATE TABLE Despensa (
+    usuario_id INT,
+    produto_id INT,
+    quantidade FLOAT NOT NULL,
+    PRIMARY KEY (usuario_id, produto_id),
+    FOREIGN KEY (usuario_id) REFERENCES Usuario(id),
+    FOREIGN KEY (produto_id) REFERENCES Produto(id)
+);
+
+-- Tabela de receitas
 CREATE TABLE Receita (
     id INT AUTO_INCREMENT PRIMARY KEY,
     nome VARCHAR(255) NOT NULL,
     modo_preparo TEXT
 );
 
+-- Tabela de ingredientes (relaciona receitas com produtos)
 CREATE TABLE Ingrediente (
     receita_id INT,
     produto_id INT,

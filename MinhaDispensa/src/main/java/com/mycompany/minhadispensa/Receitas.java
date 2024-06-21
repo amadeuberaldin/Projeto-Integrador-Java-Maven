@@ -1,9 +1,6 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
- */
 package com.mycompany.minhadispensa;
 
+import java.awt.HeadlessException;
 import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.NoResultException;
@@ -15,32 +12,31 @@ import javax.swing.event.ListSelectionListener;
 import javax.swing.table.DefaultTableModel;
 import org.hibernate.Hibernate;
 
-/**
- *
- * @author Vaio
- */
 public class Receitas extends javax.swing.JFrame {
 
-    /**
-     * Creates new form Receitas
-     */
-    public Receitas() {
+    private Usuario usuario;
+    private EntityManager em;
+
+    public Receitas(Usuario usuario, EntityManager em) {
+        this.usuario = usuario;
+        this.em = em;
         initComponents();
-        updateRecipeTable();
+        updateRecipeTable(); // Update the recipe list on UI
         configurarListener();
     }
 
     private void updateRecipeTable() {
         DefaultTableModel model = (DefaultTableModel) jtblVisualizarNomesDasReceitas.getModel();
         model.setRowCount(0);  // Clear existing data
-        EntityManager em = JPAUtil.getEntityManager();
         try {
-            List<Receita> recipes = em.createQuery("SELECT r FROM Receita r", Receita.class).getResultList();
+            List<Receita> recipes = em.createQuery("SELECT r FROM Receita r WHERE r.usuario = :usuario", Receita.class)
+                    .setParameter("usuario", usuario)
+                    .getResultList();
             for (Receita receita : recipes) {
                 model.addRow(new Object[]{receita.getNome()});
             }
-        } finally {
-            em.close();
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(this, "Erro ao atualizar a tabela de receitas: " + e.getMessage(), "Erro", JOptionPane.ERROR_MESSAGE);
         }
     }
 
@@ -59,12 +55,13 @@ public class Receitas extends javax.swing.JFrame {
         jtaCadarstrarModoDePreparo.setText("");
     }
 
-    public Receita findRecipeByName(EntityManager em, String recipeName) {
+    public Receita findRecipeByName(String recipeName) {
         try {
-            return em.createQuery("SELECT r FROM Receita r WHERE r.nome = :nome", Receita.class)
+            return em.createQuery("SELECT r FROM Receita r WHERE r.nome = :nome AND r.usuario = :usuario", Receita.class)
                     .setParameter("nome", recipeName)
+                    .setParameter("usuario", usuario)
                     .getSingleResult();
-        } catch (NoResultException e) {
+        } catch (Exception e) {
             return null;
         }
     }
@@ -111,7 +108,7 @@ public class Receitas extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(null, "receita e seus ingredientes deletados com sucesso", "Success", JOptionPane.INFORMATION_MESSAGE);
         } catch (NoResultException ex) {
             JOptionPane.showMessageDialog(null, "receita não encontrada:" + recipeName, "Error", JOptionPane.ERROR_MESSAGE);
-        } catch (Exception ex) {
+        } catch (HeadlessException ex) {
             em.getTransaction().rollback();
             JOptionPane.showMessageDialog(null, "Error deletando receita: " + ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
         } finally {
@@ -137,18 +134,13 @@ public class Receitas extends javax.swing.JFrame {
         jtblVisualizarNomesDasReceitas.getSelectionModel().addListSelectionListener(new ListSelectionListener() {
             public void valueChanged(ListSelectionEvent event) {
                 if (!event.getValueIsAdjusting() && jtblVisualizarNomesDasReceitas.getSelectedRow() != -1) {
-                    EntityManager em = JPAUtil.getEntityManager();
-                    try {
-                        String recipeName = jtblVisualizarNomesDasReceitas.getValueAt(jtblVisualizarNomesDasReceitas.getSelectedRow(), 0).toString();
-                        Receita receita = findRecipeByName(em, recipeName);
-                        if (receita != null) {
-                            displayRecipeDetails(receita);
-                        } else {
-                            JOptionPane.showMessageDialog(null, "Receita não encontrada: " + recipeName, "Erro", JOptionPane.ERROR_MESSAGE);
-                            clearDisplayFields();
-                        }
-                    } finally {
-                        em.close();
+                    String recipeName = jtblVisualizarNomesDasReceitas.getValueAt(jtblVisualizarNomesDasReceitas.getSelectedRow(), 0).toString();
+                    Receita receita = findRecipeByName(recipeName);
+                    if (receita != null) {
+                        displayRecipeDetails(receita);
+                    } else {
+                        JOptionPane.showMessageDialog(null, "Receita não encontrada: " + recipeName, "Erro", JOptionPane.ERROR_MESSAGE);
+                        clearDisplayFields();
                     }
                 }
             }
@@ -489,18 +481,15 @@ public class Receitas extends javax.swing.JFrame {
     }//GEN-LAST:event_jbtVoltarActionPerformed
 
     private void jbtConcluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtConcluirActionPerformed
-        EntityManager em = JPAUtil.getEntityManager();
         try {
             em.getTransaction().begin();
 
-            // Creating the recipe instance
             Receita receita = new Receita();
+            receita.setUsuario(usuario); // Associa a receita ao usuário
             receita.setNome(jtfNomeReceita.getText());
             receita.setModoPreparo(jtaCadarstrarModoDePreparo.getText());
-
             em.persist(receita); // Persist the recipe first to generate its ID
 
-            // Handle ingredients, assuming you have fields and quantity fields matched by index
             JTextField[] ingredientFields = {jtfIngrediente1, jtfIngrediente2, jtfIngrediente3, jtfIngrediente4, jtfIngrediente5};
             JTextField[] quantityFields = {jtfQuantidade1, jtfQuantidade2, jtfQuantidade3, jtfQuantidade4, jtfQuantidade5};
 
@@ -527,64 +516,19 @@ public class Receitas extends javax.swing.JFrame {
 
         } catch (Exception ex) {
             em.getTransaction().rollback();
-            JOptionPane.showMessageDialog(this, "Error salvando Receita: " + ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
-        } finally {
-            em.close();
+            JOptionPane.showMessageDialog(this, "Erro ao salvar Receita: " + ex.getMessage(), "Erro", JOptionPane.ERROR_MESSAGE);
         }
     }//GEN-LAST:event_jbtConcluirActionPerformed
 
     private void jbtExcluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtExcluirActionPerformed
-        // Confirma se o usuário realmente quer excluir a receita
         int response = JOptionPane.showConfirmDialog(this, "Você tem certeza que quer deletar esta receita?", "Confirmar Exclusão", JOptionPane.YES_NO_OPTION, JOptionPane.WARNING_MESSAGE);
         if (response == JOptionPane.YES_OPTION) {
-            // Pega o nome da receita do label onde é exibido
             String recipeName = jlblNomeReceitaMostrar.getText();
-
-            // Chama o método para excluir a receita pelo nome
             deleteRecipeByName(recipeName);
-
-            // Atualiza a tabela para refletir a mudança
-            updateRecipeTable();
-
-            // Limpa os campos de detalhes após a exclusão
-            clearDisplayFields();
+            updateRecipeTable(); // Update the recipe list on UI
         }
     }//GEN-LAST:event_jbtExcluirActionPerformed
 
-    /**
-     * @param args the command line arguments
-     */
-    public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(Receitas.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(Receitas.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(Receitas.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(Receitas.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        }
-        //</editor-fold>
-
-        /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new Receitas().setVisible(true);
-            }
-        });
-    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel jPanel1;

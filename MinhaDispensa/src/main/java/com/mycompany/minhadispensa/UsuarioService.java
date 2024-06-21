@@ -1,7 +1,3 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package com.mycompany.minhadispensa;
 
 import javax.persistence.EntityManager;
@@ -31,6 +27,57 @@ public class UsuarioService {
             JOptionPane.showMessageDialog(null, "Erro ao cadastrar usuário: " + ex.getMessage(), "Erro", JOptionPane.ERROR_MESSAGE);
         } finally {
             em.close(); // Fecha o EntityManager
+        }
+    }
+
+    public Usuario buscarUsuarioPorEmail(String email) {
+        EntityManager em = JPAUtil.getEntityManager();
+        try {
+            return em.createQuery("SELECT u FROM Usuario u WHERE u.email = :email", Usuario.class)
+                    .setParameter("email", email)
+                    .getSingleResult();
+        } catch (Exception ex) {
+            JOptionPane.showMessageDialog(null, "Erro ao buscar usuário: " + ex.getMessage(), "Erro", JOptionPane.ERROR_MESSAGE);
+            return null;
+        } finally {
+            em.close();
+        }
+    }
+
+    public void adicionarProdutoNaDespensa(Long usuarioId, Long produtoId, Float quantidade) {
+        EntityManager em = JPAUtil.getEntityManager();
+        try {
+            em.getTransaction().begin();
+
+            Usuario usuario = em.find(Usuario.class, usuarioId);
+            Produto produto = em.find(Produto.class, produtoId);
+
+            if (usuario == null || produto == null) {
+                throw new IllegalArgumentException("Usuário ou Produto não encontrado.");
+            }
+
+            DespensaId despensaId = new DespensaId(usuarioId, produtoId);
+            Despensa despensa = em.find(Despensa.class, despensaId);
+            if (despensa == null) {
+                despensa = new Despensa();
+                despensa.setId(despensaId);
+                despensa.setUsuario(usuario);
+                despensa.setProduto(produto);
+                despensa.setQuantidade(quantidade);
+                em.persist(despensa);
+            } else {
+                despensa.setQuantidade(despensa.getQuantidade() + quantidade);
+                em.merge(despensa);
+            }
+
+            em.getTransaction().commit();
+
+            JOptionPane.showMessageDialog(null, "Produto adicionado na despensa com sucesso!");
+        } catch (Exception ex) {
+            em.getTransaction().rollback();
+            JOptionPane.showMessageDialog(null, "Erro ao adicionar produto na despensa: " + ex.getMessage(), "Erro", JOptionPane.ERROR_MESSAGE);
+        } finally {
+            em.close();
         }
     }
 }

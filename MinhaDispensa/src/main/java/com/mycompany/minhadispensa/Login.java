@@ -1,7 +1,3 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
- */
 package com.mycompany.minhadispensa;
 
 import javax.persistence.EntityManager;
@@ -25,33 +21,29 @@ public class Login extends javax.swing.JFrame {
                     .setParameter("email", email)
                     .getSingleResult();
 
-            if (usuario != null && BCrypt.checkpw(senha, usuario.getSenha())) {
-                return true;  // Confirma que a senha coincide
-            }
+            return usuario != null && BCrypt.checkpw(senha, usuario.getSenha());
         } catch (NoResultException nre) {
             // Usuário não encontrado
             JOptionPane.showMessageDialog(null, "Usuário não encontrado!", "Erro", JOptionPane.ERROR_MESSAGE);
         } catch (Exception ex) {
             JOptionPane.showMessageDialog(null, "Erro ao autenticar usuário: " + ex.getMessage(), "Erro", JOptionPane.ERROR_MESSAGE);
-            ex.printStackTrace();
         }
         return false;
     }
 
-    private String getAuthenticatedUserName(String email, String senhaPlana, EntityManager em) {
+    private Usuario getAuthenticatedUser(String email, String senhaPlana, EntityManager em) {
         try {
             TypedQuery<Usuario> query = em.createQuery("SELECT u FROM Usuario u WHERE u.email = :email", Usuario.class);
             query.setParameter("email", email);
             Usuario usuario = query.getSingleResult();
 
             if (usuario != null && BCrypt.checkpw(senhaPlana, usuario.getSenha())) {
-                return usuario.getNome();
+                return usuario;
             }
         } catch (NoResultException ex) {
             // Nenhum usuário encontrado com esse email
             return null;
         } catch (Exception ex) {
-            ex.printStackTrace();
         }
         return null;
     }
@@ -160,32 +152,26 @@ public class Login extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jbtLoginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtLoginActionPerformed
-       String email = jtxfLogin.getText();
-    String senha = new String(jpfSenha.getPassword());
-    EntityManager em = JPAUtil.getEntityManager(); // Obtém o EntityManager
+        String email = jtxfLogin.getText();
+        String senha = new String(jpfSenha.getPassword());
 
-    try {
-        em.getTransaction().begin();
-        boolean isAuthenticated = authenticateUser(email, senha, em);
-        if (isAuthenticated) {
-            String nomeUsuario = getAuthenticatedUserName(email, senha, em); // Obtém o nome do usuário autenticado
-            if (nomeUsuario != null) {
-                this.dispose(); // Fecha a janela de login
-                Inicio inicio = new Inicio(nomeUsuario, em); // Passa o nome do usuário e o EntityManager para a tela de início
-                inicio.setVisible(true);
-                inicio.setLocationRelativeTo(null); // Centraliza a janela
+        try {
+            if (authenticateUser(email, senha, em)) {
+                Usuario usuario = getAuthenticatedUser(email, senha, em);
+                if (usuario != null) {
+                    this.dispose(); // Fecha a janela de login
+                    Inicio inicio = new Inicio(usuario, em); // Passa o objeto Usuario e o EntityManager para a tela de início
+                    inicio.setVisible(true);
+                    inicio.setLocationRelativeTo(null); // Centraliza a janela
+                } else {
+                    JOptionPane.showMessageDialog(this, "Erro ao recuperar o usuário autenticado", "Erro", JOptionPane.ERROR_MESSAGE);
+                }
             } else {
-                JOptionPane.showMessageDialog(this, "Erro ao recuperar o nome do usuário", "Erro", JOptionPane.ERROR_MESSAGE);
+                JOptionPane.showMessageDialog(this, "Credenciais inválidas", "Erro", JOptionPane.ERROR_MESSAGE);
             }
-        } else {
-            JOptionPane.showMessageDialog(this, "Credenciais inválidas", "Erro", JOptionPane.ERROR_MESSAGE);
+        } catch (Exception ex) {
+            JOptionPane.showMessageDialog(this, "Erro ao autenticar: " + ex.getMessage(), "Erro", JOptionPane.ERROR_MESSAGE);
         }
-    } catch (Exception ex) {
-        JOptionPane.showMessageDialog(this, "Erro ao autenticar: " + ex.getMessage(), "Erro", JOptionPane.ERROR_MESSAGE);
-    } finally {
-        em.getTransaction().commit();
-        em.close(); // Importante fechar o EntityManager após o uso
-    }
     }//GEN-LAST:event_jbtLoginActionPerformed
 
     private void jbtCadastroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtCadastroActionPerformed
